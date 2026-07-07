@@ -1,24 +1,43 @@
-from database import connect
+from modules.books import add_book, view_books
+from modules.students import add_student, view_students
+from modules.issue_return import issue_book
 
-try:
-    db = connect()
-    print("! ! Connected ! !")
-    db.close()
-except Exception as e:
-    print("Error: ", e)
+while True:
+    print("\n===== Library Management System =====")
+    print("1. Add Book")
+    print("2. View Book")
+    print("3. Add Students")
+    print("4. View Students")
+    print("5. Issue Book")
+    print("6. Exit")
 
-from modules.books import add_book
-bookTitle = input("Enter the books Title: ")
-bookAuthor = input("Enter the books Author: ")
-bookQuantity = int(input("Enter Quantity: "))
+    choice = input("Choose: ")
 
-add_book(
-    bookTitle,
-    bookAuthor,
-    bookQuantity
-)
+    if choice == "1":
 
-print("! ! Book Added ! !")
+        title = input("Title: ")
+        author = input("Author: ")
+        quantity = int(input("Quantity: "))
 
-from modules.books import view_books
-view_books()
+        add_book(title, author, quantity)
+
+        print("Book Added!")
+    elif choice == "3":
+        name = input("Student Name: ")
+        add_student(name)
+        
+    
+    elif choice == "4":
+        
+        view_students()
+
+    elif choice == "5":
+        student_id = int(input("Student ID: "))
+        book_id = int(input("Book ID: "))
+        issue_book(student_id, book_id)
+    
+    elif choice == "6":
+        break
+    else:
+        print("Invalid choice")
+
